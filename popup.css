@@ -560,16 +560,84 @@ html {
     color: var(--text-faint);
 }
 
-.gain-icon {
+/* Buffer headroom as PROXIMITY TO LIVE: a track whose right end is a fixed
+   live-red edge (the "finish line"), with the mode's marker riding toward it as
+   the mode gets closer to live. currentColor inherits the chip's states for free
+   — degraded gray at rest, live red on the selected card — so the marker and its
+   trail warm up with the rest of the chip; the live edge stays red always. Reads
+   "closer to live = further along", matching the app's whole purpose (the old
+   signal-bars read backwards: fewer bars for the most-live mode). */
+.live-meter {
     flex: none;
     display: inline-flex;
-    width: 13px;
-    height: 13px;
+    align-items: center;
 }
 
-.gain-icon svg {
-    width: 13px;
-    height: 13px;
+.live-track {
+    position: relative;
+    width: 52px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--surface-3);
+}
+
+/* The trail behind the marker — same hue, dimmed, so the dot still reads as the
+   leading edge. */
+.live-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: calc(var(--live) * 100%);
+    border-radius: 999px;
+    background: currentColor;
+    opacity: 0.5;
+}
+
+.live-dot {
+    position: absolute;
+    top: 50%;
+    left: calc(var(--live) * 100%);
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+}
+
+/* Fixed live-red edge at the right of every track — the point every mode is
+   heading toward, in the sync axis' red so it reads as "live" even on a resting
+   gray chip. */
+.live-track::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: -2px;
+    bottom: -2px;
+    width: 3px;
+    border-radius: 2px;
+    background: var(--sync);
+    box-shadow: 0 0 6px -1px var(--sync-glow);
+}
+
+/* Auto adapts, so its marker drifts across the range and back. Stopped cold
+   under reduced motion (see the media block below) — it then rests at --live. */
+.live-meter--auto .live-dot {
+    animation: live-drift 3.4s var(--ease) infinite;
+}
+
+.live-meter--auto .live-fill {
+    animation: live-drift-fill 3.4s var(--ease) infinite;
+}
+
+@keyframes live-drift {
+    0%, 100% { left: 30%; }
+    50% { left: 82%; }
+}
+
+@keyframes live-drift-fill {
+    0%, 100% { width: 30%; }
+    50% { width: 82%; }
 }
 
 .mode-check {
@@ -1564,6 +1632,14 @@ html {
     .mode-icon .ico .clean {
         filter: none !important;
         transform: none !important;
+    }
+
+    /* Infinite loops don't reliably freeze under the duration kill above —
+     * Gecko can sample the 0.001ms cycle at arbitrary phases and shimmer. Stop
+     * the auto meter's drift cold; the marker then rests at its --live value. */
+    .live-meter--auto .live-dot,
+    .live-meter--auto .live-fill {
+        animation: none;
     }
 }
 

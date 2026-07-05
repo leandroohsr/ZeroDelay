@@ -431,13 +431,17 @@ export const presets = {
 // Order shown in the UI, with display metadata.
 export const modeOrder = ['off', 'auto', 'suave', 'balanced', 'aggressive', 'extreme'];
 
+// `live` is each mode's proximity to the live edge (0 = most buffer / farthest
+// behind, 1 = right at live), driving the popup's chip meter. Inverse of the
+// buffer it keeps: Gentle sits back (more buffer), Extreme nearly touches live.
+// Off has no meter; Auto adapts, so its marker drifts (CSS) around a mid value.
 export const modeMeta = {
     off: { title: label.modeOff, desc: label.modeOffDesc, conn: label.modeOffConn, gain: label.modeOffGain },
-    auto: { title: label.modeAuto, desc: label.modeAutoDesc, conn: label.modeAutoConn, gain: label.modeAutoGain },
-    suave: { title: label.modeSuave, desc: label.modeSuaveDesc, conn: label.modeSuaveConn, gain: label.modeSuaveGain },
-    balanced: { title: label.modeBalanced, desc: label.modeBalancedDesc, conn: label.modeBalancedConn, gain: label.modeBalancedGain },
-    aggressive: { title: label.modeAggressive, desc: label.modeAggressiveDesc, conn: label.modeAggressiveConn, gain: label.modeAggressiveGain },
-    extreme: { title: label.modeExtreme, desc: label.modeExtremeDesc, conn: label.modeExtremeConn, gain: label.modeExtremeGain },
+    auto: { title: label.modeAuto, desc: label.modeAutoDesc, conn: label.modeAutoConn, gain: label.modeAutoGain, live: 0.55 },
+    suave: { title: label.modeSuave, desc: label.modeSuaveDesc, conn: label.modeSuaveConn, gain: label.modeSuaveGain, live: 0.18 },
+    balanced: { title: label.modeBalanced, desc: label.modeBalancedDesc, conn: label.modeBalancedConn, gain: label.modeBalancedGain, live: 0.44 },
+    aggressive: { title: label.modeAggressive, desc: label.modeAggressiveDesc, conn: label.modeAggressiveConn, gain: label.modeAggressiveGain, live: 0.68 },
+    extreme: { title: label.modeExtreme, desc: label.modeExtremeDesc, conn: label.modeExtremeConn, gain: label.modeExtremeGain, live: 0.9 },
 };
 
 /**

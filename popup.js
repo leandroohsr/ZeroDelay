@@ -125,7 +125,6 @@ const ICONS = {
         '<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>'),
     check: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
     wifi: solo('<path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/>'),
-    gain: solo('<path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/><path d="M8 10v4"/><path d="M8 12H3"/>'),
     bmc: solo('<path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/>'),
 };
 
@@ -197,6 +196,20 @@ function renderStatic() {
     $('#issue-label').textContent = L.reportIssue;
 }
 
+// Buffer headroom read as PROXIMITY TO LIVE: a track capped at the right by the
+// fixed live-red edge, with the mode's marker riding toward it as the mode gets
+// closer to live (Extreme nearly touches it; Gentle sits back with more buffer).
+// This reframes the earlier signal-bars, which read backwards — more bars looked
+// "stronger" yet meant further from live, so the most on-mission mode (Extreme)
+// looked the weakest. The value lives in common.modeMeta.live. Decorative
+// (aria-hidden); the chip's "buffer ~Xs" text still carries the number.
+function buildLiveMeter(name, live) {
+    return el('span', {
+        class: 'live-meter' + (name === 'auto' ? ' live-meter--auto' : ''),
+        style: '--live:' + live, 'aria-hidden': 'true',
+    }, el('span', { class: 'live-track' }, el('span', { class: 'live-fill' }), el('span', { class: 'live-dot' })));
+}
+
 function renderModes() {
     const container = $('#mode-cards');
     for (const name of common.modeOrder) {
@@ -210,7 +223,7 @@ function renderModes() {
                 el('span', { class: 'mode-name', text: meta.title }),
                 el('span', { class: 'mode-desc', text: meta.desc }),
                 el('span', { class: 'mode-conn' }, el('span', { class: 'conn-icon', html: ICONS.wifi }), el('span', { text: meta.conn })),
-                el('span', { class: 'mode-gain' + (name === 'off' ? ' is-none' : '') }, el('span', { class: 'gain-icon', html: ICONS.gain }), el('span', { text: meta.gain })),
+                el('span', { class: 'mode-gain' + (name === 'off' ? ' is-none' : '') }, name === 'off' ? null : buildLiveMeter(name, meta.live), el('span', { text: meta.gain })),
             ),
             el('span', { class: 'mode-check', html: ICONS.check }),
         );
