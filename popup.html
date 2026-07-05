@@ -78,6 +78,21 @@
             </div>
         </section>
 
+        <section id="live-games" class="live-games" aria-labelledby="lg-banner-label" hidden>
+            <button id="lg-banner" class="lg-banner" type="button" aria-expanded="false" aria-controls="lg-body">
+                <span class="lg-live-dot" aria-hidden="true"></span>
+                <span id="lg-banner-label" class="lg-banner-label"></span>
+                <svg class="lg-chevron" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+            <div id="lg-body" class="lg-body" hidden>
+                <p id="lg-state" class="lg-state" hidden></p>
+                <div id="lg-list" class="lg-list"></div>
+            </div>
+        </section>
+
         <section class="modes" aria-labelledby="modes-title">
             <h2 id="modes-title" class="section-title"></h2>
             <div id="mode-cards" class="mode-cards" role="radiogroup"></div>

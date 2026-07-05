@@ -1610,3 +1610,219 @@ body.hexa [data-signal="synced"] .brand-o {
 body.hexa [data-signal="synced"] .brand-o::after {
     border-color: #ffdf00;
 }
+
+/* --------------------------------------------------------------- Live games
+ * Top-of-popup discovery: a live banner + YouTube-style thumbnail cards. The
+ * thumbnails carry the "professional" look; colours are token-driven so light
+ * and dark both work. Sits above the fold so live games are easy to find. */
+.live-games {
+    margin-bottom: 0px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    overflow: hidden;
+}
+
+.lg-banner {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 0;
+    background: var(--surface-2);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 160ms var(--ease), color 160ms var(--ease);
+}
+
+.lg-banner:hover:not(:disabled) {
+    color: var(--sync-strong);
+}
+
+.lg-banner:disabled {
+    cursor: default;
+}
+
+.lg-banner-label {
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.lg-live-dot {
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--sync);
+    animation: live-pulse 1.6s var(--ease) infinite;
+}
+
+@keyframes live-pulse {
+    0% { box-shadow: 0 0 0 0 var(--sync-glow); }
+    70% { box-shadow: 0 0 0 5px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+.lg-chevron {
+    flex: none;
+    color: var(--text-faint);
+    transition: transform 200ms var(--spring);
+}
+
+.lg-banner[aria-expanded="false"] .lg-chevron {
+    transform: rotate(-90deg);
+}
+
+.lg-body {
+    padding: 8px;
+}
+
+.lg-state {
+    margin: 0;
+    padding: 10px 6px;
+    color: var(--text-faint);
+    font-size: 12px;
+    text-align: center;
+}
+
+.lg-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.lg-group-title {
+    margin: 6px 2px 2px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+}
+
+.lg-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 6px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    animation: rise 200ms var(--ease) both;
+    transition: background 140ms var(--ease), border-color 140ms var(--ease), transform 120ms var(--spring);
+}
+
+.lg-card:hover {
+    background: var(--surface-2);
+    border-color: var(--border);
+    transform: translateY(-1px);
+}
+
+.lg-card:active {
+    transform: translateY(0);
+}
+
+.lg-thumb {
+    position: relative;
+    flex: none;
+    width: 120px;
+    aspect-ratio: 16 / 9;
+    border-radius: 7px;
+    overflow: hidden;
+    background: var(--surface-3);
+}
+
+.lg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.lg-badge {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #fff;
+}
+
+.lg-badge--live {
+    background: var(--accent);
+}
+
+.lg-badge--soon {
+    background: rgba(0, 0, 0, 0.78);
+}
+
+.lg-badge-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.lg-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.lg-title {
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.lg-meta {
+    font-size: 11px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* MODO HEXA — recolour the live cues to Brazil gold while the theme is on. */
+body.hexa .lg-live-dot,
+body.hexa .lg-badge--live {
+    background: #ffdf00;
+}
+
+body.hexa .lg-badge--live {
+    color: #1b1b00;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lg-live-dot {
+        animation: none;
+    }
+}

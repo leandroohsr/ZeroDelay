@@ -3,6 +3,7 @@
 
 import * as common from './common.js';
 import * as pix from './pix.js';
+import { fetchLiveMatches } from './youtube-live.js';
 
 const L = common.label;
 
@@ -309,6 +310,107 @@ function renderFaq() {
             el('p', { class: 'faq-a', text: it.a }),
         ));
     }
+}
+
+// --------------------------------------------------------------- Live games
+// A top-of-popup banner + thumbnail cards of the football matches LIVE on
+// YouTube right now (real data, via youtube-live.js — no mocks). Fetch runs only
+// on popup open, with a short storage cache so reopening is instant. Each card
+// opens the real stream, where the engine then keeps it near real time. The
+// section is invisible unless there is actually something live, so it never
+// clutters the popup when no game is on.
+const LG_CACHE_KEY = 'liveGamesCache';        // { ts, live, upcoming } — outside engine storage
+const LG_CACHE_TTL = 3 * 60 * 1000;           // reuse the cached list for 3 min before refetching
+
+function renderLiveGames() {
+    const section = $('#live-games');
+    const banner = $('#lg-banner');
+    const bannerLabel = $('#lg-banner-label');
+    const body = $('#lg-body');
+    const list = $('#lg-list');
+    const stateEl = $('#lg-state');
+    if (!section) return;
+
+    const lang = (chrome.i18n && chrome.i18n.getUILanguage()) || 'en';
+    const nf = new Intl.NumberFormat(lang);
+    // Upcoming is scoped to today (see fetchLiveMatches), so the clock time alone
+    // reads clearly — shown in the viewer's locale and timezone.
+    const timeFmt = new Intl.DateTimeFormat(lang, { hour: '2-digit', minute: '2-digit' });
+
+    let expanded = false;   // the section opens COLLAPSED — the user taps to expand
+    const setExpanded = on => { expanded = on; banner.setAttribute('aria-expanded', String(on)); body.hidden = !on; };
+    banner.addEventListener('click', () => { if (!banner.disabled) setExpanded(!expanded); });
+    const setState = text => { stateEl.textContent = text || ''; stateEl.hidden = !text; };
+
+    const bannerText = (liveN, upN) => {
+        if (liveN) return upN ? `${liveN} ${L.liveGamesWord} · ${upN} ${L.matchesUpcomingGroup}` : `${liveN} ${L.liveGamesWord}`;
+        return upN ? `${upN} ${L.matchesUpcomingGroup}` : L.matchesEmpty;
+    };
+
+    const metaText = m => {
+        if (m.status === 'live') {
+            return m.viewers != null ? `${m.channel} · ${nf.format(m.viewers)} ${L.matchesWatching}` : m.channel;
+        }
+        return m.scheduledStart ? `${m.channel} · ${timeFmt.format(m.scheduledStart)}` : m.channel;
+    };
+
+    const card = m => el('button', {
+        class: 'lg-card', type: 'button', 'aria-label': `${L.matchesWatchAria}: ${m.title}`,
+        onclick: () => { try { chrome.tabs.create({ url: m.watchUrl }); } catch { /* best-effort */ } },
+    },
+        el('span', { class: 'lg-thumb' },
+            el('img', { class: 'lg-img', src: m.thumbnail, alt: '', loading: 'lazy', referrerpolicy: 'no-referrer' }),
+            m.status === 'live'
+                ? el('span', { class: 'lg-badge lg-badge--live' },
+                    el('span', { class: 'lg-badge-dot', 'aria-hidden': 'true' }), el('span', { text: L.matchesLiveTag }))
+                : el('span', { class: 'lg-badge lg-badge--soon', text: L.matchesUpcomingGroup }),
+        ),
+        el('span', { class: 'lg-info' },
+            el('span', { class: 'lg-title', text: m.title }),
+            el('span', { class: 'lg-meta', text: metaText(m) }),
+        ),
+    );
+
+    let shown = false;   // have we painted at least one real match?
+
+    const paint = ({ live = [], upcoming = [] } = {}) => {
+        if (!live.length && !upcoming.length) { if (!shown) section.hidden = true; return; }
+        shown = true;
+        section.hidden = false;
+        banner.disabled = false;
+        bannerLabel.textContent = bannerText(live.length, upcoming.length);
+        setState('');
+        list.textContent = '';
+        for (const m of live) list.append(card(m));
+        if (upcoming.length) {
+            list.append(el('h3', { class: 'lg-group-title', text: L.matchesUpcomingGroup }));
+            for (const m of upcoming) list.append(card(m));
+        }
+    };
+
+    const controller = new AbortController();
+    window.addEventListener('unload', () => controller.abort());
+
+    const refresh = async () => {
+        if (!shown) { section.hidden = false; banner.disabled = true; bannerLabel.textContent = L.matchesTitle; setState(L.matchesLoading); }
+        try {
+            const res = await fetchLiveMatches({ lang, signal: controller.signal, limit: 15 });
+            chrome.storage.local.set({ [LG_CACHE_KEY]: { ts: Date.now(), live: res.live, upcoming: res.upcoming } });
+            paint(res);
+        } catch {
+            if (controller.signal.aborted) return;
+            // Fail quiet: if we already showed cached matches keep them; otherwise
+            // hide the section rather than leave a stuck loading/error banner.
+            if (!shown) section.hidden = true;
+        }
+    };
+
+    // Render the cache instantly (if any), then refresh when it's stale.
+    chrome.storage.local.get([LG_CACHE_KEY], d => {
+        const cache = d[LG_CACHE_KEY];
+        if (cache && Array.isArray(cache.live)) paint(cache);
+        if (!cache || (Date.now() - cache.ts) >= LG_CACHE_TTL) refresh();
+    });
 }
 
 function renderReset() {
@@ -675,6 +777,7 @@ function updateChannelHint() {
     renderStatic();
     renderThemeToggle();
     renderModes();
+    renderLiveGames();
     renderChannelMemory();
     renderIndicators();
     renderHexa();

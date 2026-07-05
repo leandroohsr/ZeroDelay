@@ -20,6 +20,7 @@ const files = [
     'engine/controller.js',
     'hexa/theme.js',
     'pix.js',
+    'youtube-live.js',
     'popup.js',
     'popup.css',
     'popup.html',

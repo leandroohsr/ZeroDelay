@@ -271,5 +271,29 @@
    },
    "reportIssue": {
       "message": "Signaler un problème"
+   },
+   "matchesTitle": {
+      "message": "Matchs en direct"
+   },
+   "liveGamesWord": {
+      "message": "en direct"
+   },
+   "matchesUpcomingGroup": {
+      "message": "À venir"
+   },
+   "matchesLiveTag": {
+      "message": "EN DIRECT"
+   },
+   "matchesWatching": {
+      "message": "spectateurs"
+   },
+   "matchesWatchAria": {
+      "message": "Regarder sur YouTube"
+   },
+   "matchesEmpty": {
+      "message": "Aucun match en direct pour le moment."
+   },
+   "matchesLoading": {
+      "message": "Recherche des matchs en direct…"
    }
 }

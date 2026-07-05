@@ -50,6 +50,7 @@
    } ],
    "default_locale": "en",
    "description": "__MSG_appDesc__",
+   "host_permissions": [ "https://www.youtube.com/*" ],
    "icons": {
       "128": "icons/128.png",
       "16": "icons/16.png",

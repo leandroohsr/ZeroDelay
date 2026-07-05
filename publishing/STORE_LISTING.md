@@ -36,8 +36,9 @@ POR QUE INSTALAR
 • Funciona sozinho — escolha um modo uma vez e esqueça.
 • Inteligente e gentil — acelera só o necessário e nunca quando o buffer está
   baixo, evitando travadas.
-• Leve e privado — sem coleta de dados, sem servidores externos, sem código
-  remoto.
+• Leve e privado — sem coleta de dados, sem servidores nossos, sem código
+  remoto. A única comunicação de rede é uma consulta pública ao próprio YouTube
+  (só ao abrir o popup) para listar os jogos ao vivo.
 
 RECURSOS
 • Modos de um toque — da recuperação suave (internet fraca) à latência mínima.
@@ -47,6 +48,9 @@ RECURSOS
 • Indicadores opcionais no player — velocidade, latência ao vivo e saúde do
   buffer, ao lado do selo AO VIVO, inclusive em tela cheia.
 • Funciona também no player incorporado do YouTube.
+• Jogos ao vivo — o popup lista as transmissões OFICIAIS de futebol que estão ao
+  vivo no YouTube (com miniatura e canal), filtrando re-streams e transmissões
+  fake. Um clique te leva direto à live, onde o ZeroDelay já segura a latência.
 
 PRIVACIDADE
 O ZeroDelay não coleta dados pessoais, não tem analytics e não carrega código
@@ -80,7 +84,8 @@ do próprio player, que é o que realmente faz a recuperação funcionar nelas.
 ```
 O ZeroDelay reduz a latência de transmissões ao vivo do YouTube ajustando a
 velocidade de reprodução (e, opcionalmente, pulando para o ao vivo) para manter o
-player perto da borda ao vivo.
+player perto da borda ao vivo. Também mostra, no popup, os jogos oficiais que
+estão ao vivo no YouTube, consultando a busca pública do próprio site.
 ```
 
 **Justificativas de permissão** (colar cada uma):
@@ -89,8 +94,8 @@ player perto da borda ao vivo.
   `Salva localmente as configurações do usuário (modo, indicadores) e pequenos contadores anônimos. Nenhum dado é transmitido.`
 - **alarms**:
   `Agenda uma verificação local periódica que decide se deve mostrar um lembrete de doação opcional e dispensável. Não é usada para atividade de rede em segundo plano.`
-- **Acesso a https://www.youtube.com/**:
-  `O content script roda no YouTube para ler as estatísticas de latência ao vivo e de buffer do player e ajustar a velocidade de reprodução. Não acessa conta, histórico nem dados pessoais.`
+- **Acesso a https://www.youtube.com/ (content script + host permission)**:
+  `Usado para dois fins: (1) o content script roda no YouTube para ler as estatísticas de latência e buffer do player e ajustar a velocidade de reprodução; (2) ao abrir o popup, a extensão consulta a busca pública do YouTube para listar os jogos oficiais ao vivo. A consulta vai apenas ao YouTube, sem cookies/login, e não acessa conta, histórico nem dados pessoais.`
 
 **Você está usando código remoto?** → **Não.**
 `Todo o JavaScript está empacotado na extensão, incluindo o gerador de QR Code (vendor/qrcode.js). Nenhum código remoto é carregado (compatível com Manifest V3).`

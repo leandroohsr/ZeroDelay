@@ -162,6 +162,18 @@ export const label = {
     // Footer links — project page + issue tracker on GitHub.
     aboutLink: msg('aboutLink', 'Sobre o ZeroDelay'),
     reportIssue: msg('reportIssue', 'Relatar um problema'),
+
+    // Live games — the top-of-popup "jogos ao vivo" banner + thumbnail cards of
+    // real football streams live on YouTube now (youtube-live.js). Clicking a card
+    // opens the stream, where ZeroDelay keeps it near real time.
+    matchesTitle: msg('matchesTitle', 'Jogos ao vivo'),
+    liveGamesWord: msg('liveGamesWord', 'ao vivo agora'),
+    matchesUpcomingGroup: msg('matchesUpcomingGroup', 'Em breve'),
+    matchesLiveTag: msg('matchesLiveTag', 'AO VIVO'),
+    matchesWatching: msg('matchesWatching', 'assistindo'),
+    matchesWatchAria: msg('matchesWatchAria', 'Assistir no YouTube'),
+    matchesEmpty: msg('matchesEmpty', 'Nenhum jogo ao vivo agora.'),
+    matchesLoading: msg('matchesLoading', 'Buscando jogos ao vivo…'),
 };
 
 // ---------------------------------------------------------------------------

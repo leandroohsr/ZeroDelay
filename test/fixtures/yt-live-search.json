@@ -1,0 +1,639 @@
+{
+  "contents": [
+    {
+      "videoRenderer": {
+        "videoId": "nJtyshk43Xo",
+        "title": {
+          "runs": [
+            {
+              "text": "AO VIVO: BRASIL X NORUEGA | COPA DO MUNDO FIFA™ 2026 | OITAVAS DE FINAL"
+            }
+          ],
+          "accessibility": {
+            "accessibilityData": {
+              "label": "AO VIVO: BRASIL X NORUEGA | COPA DO MUNDO FIFA™ 2026 | OITAVAS DE FINAL"
+            }
+          }
+        },
+        "ownerText": {
+          "runs": [
+            {
+              "text": "CazéTV",
+              "navigationEndpoint": {
+                "clickTrackingParams": "CMUBENwwGAAiEwiZqfnBkbyVAxX4UrgEHdxZIBPKAQQLKpSx",
+                "commandMetadata": {
+                  "webCommandMetadata": {
+                    "url": "/@CazeTV",
+                    "webPageType": "WEB_PAGE_TYPE_CHANNEL",
+                    "rootVe": 3611,
+                    "apiUrl": "/youtubei/v1/browse"
+                  }
+                },
+                "browseEndpoint": {
+                  "browseId": "UCZiYbVptd3PVPf4f6eR6UaQ",
+                  "canonicalBaseUrl": "/@CazeTV"
+                }
+              }
+            }
+          ]
+        },
+        "badges": [
+          {
+            "metadataBadgeRenderer": {
+              "icon": {
+                "iconType": "LIVE"
+              },
+              "style": "BADGE_STYLE_TYPE_LIVE_NOW",
+              "label": "AO VIVO",
+              "trackingParams": "CMUBENwwGAAiEwiZqfnBkbyVAxX4UrgEHdxZIBM="
+            }
+          }
+        ],
+        "thumbnailOverlays": [
+          {
+            "thumbnailOverlayToggleButtonRenderer": {
+              "isToggled": false,
+              "untoggledIcon": {
+                "iconType": "WATCH_LATER"
+              },
+              "toggledIcon": {
+                "iconType": "CHECK"
+              },
+              "untoggledTooltip": "Assistir mais tarde",
+              "toggledTooltip": "Adicionado",
+              "untoggledServiceEndpoint": {
+                "clickTrackingParams": "CMcBEPnnAxgCIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                "commandMetadata": {
+                  "webCommandMetadata": {
+                    "sendPost": true,
+                    "apiUrl": "/youtubei/v1/browse/edit_playlist"
+                  }
+                },
+                "playlistEditEndpoint": {
+                  "playlistId": "WL",
+                  "actions": [
+                    {
+                      "addedVideoId": "nJtyshk43Xo",
+                      "action": "ACTION_ADD_VIDEO"
+                    }
+                  ]
+                }
+              },
+              "toggledServiceEndpoint": {
+                "clickTrackingParams": "CMcBEPnnAxgCIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                "commandMetadata": {
+                  "webCommandMetadata": {
+                    "sendPost": true,
+                    "apiUrl": "/youtubei/v1/browse/edit_playlist"
+                  }
+                },
+                "playlistEditEndpoint": {
+                  "playlistId": "WL",
+                  "actions": [
+                    {
+                      "action": "ACTION_REMOVE_VIDEO_BY_VIDEO_ID",
+                      "removedVideoId": "nJtyshk43Xo"
+                    }
+                  ]
+                }
+              },
+              "untoggledAccessibility": {
+                "accessibilityData": {
+                  "label": "Assistir mais tarde"
+                }
+              },
+              "toggledAccessibility": {
+                "accessibilityData": {
+                  "label": "Adicionado"
+                }
+              },
+              "trackingParams": "CMcBEPnnAxgCIhMIman5wZG8lQMV-FK4BB3cWSAT"
+            }
+          },
+          {
+            "thumbnailOverlayToggleButtonRenderer": {
+              "untoggledIcon": {
+                "iconType": "ADD_TO_QUEUE_TAIL"
+              },
+              "toggledIcon": {
+                "iconType": "PLAYLIST_ADD_CHECK"
+              },
+              "untoggledTooltip": "Adicionar à fila",
+              "toggledTooltip": "Adicionado",
+              "untoggledServiceEndpoint": {
+                "clickTrackingParams": "CMYBEMfsBBgDIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                "commandMetadata": {
+                  "webCommandMetadata": {
+                    "sendPost": true
+                  }
+                },
+                "signalServiceEndpoint": {
+                  "signal": "CLIENT_SIGNAL",
+                  "actions": [
+                    {
+                      "clickTrackingParams": "CMYBEMfsBBgDIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                      "addToPlaylistCommand": {
+                        "openMiniplayer": true,
+                        "videoId": "nJtyshk43Xo",
+                        "listType": "PLAYLIST_EDIT_LIST_TYPE_QUEUE",
+                        "onCreateListCommand": {
+                          "clickTrackingParams": "CMYBEMfsBBgDIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                          "commandMetadata": {
+                            "webCommandMetadata": {
+                              "sendPost": true,
+                              "apiUrl": "/youtubei/v1/playlist/create"
+                            }
+                          },
+                          "createPlaylistServiceEndpoint": {
+                            "videoIds": [
+                              "nJtyshk43Xo"
+                            ],
+                            "params": "CAQ%3D"
+                          }
+                        },
+                        "videoIds": [
+                          "nJtyshk43Xo"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "untoggledAccessibility": {
+                "accessibilityData": {
+                  "label": "Adicionar à fila"
+                }
+              },
+              "toggledAccessibility": {
+                "accessibilityData": {
+                  "label": "Adicionado"
+                }
+              },
+              "trackingParams": "CMYBEMfsBBgDIhMIman5wZG8lQMV-FK4BB3cWSAT"
+            }
+          },
+          {
+            "thumbnailOverlayNowPlayingRenderer": {
+              "text": {
+                "runs": [
+                  {
+                    "text": "Tocando agora"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "thumbnailOverlayLoadingPreviewRenderer": {
+              "text": {
+                "runs": [
+                  {
+                    "text": "Mantenha o cursor em cima do vídeo para ver uma prévia"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "viewCountText": {
+          "runs": [
+            {
+              "text": "2.485.548"
+            },
+            {
+              "text": " assistindo"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "videoRenderer": {
+        "videoId": "VoOng-r5xG8",
+        "title": {
+          "runs": [
+            {
+              "text": "MÉXICO X INGLATERRA JOGO AO VIVO | COPA DO MUNDO AO VIVO | MÉXICO AO VIVO | MÉXICO VS ENGLAND LIVE"
+            }
+          ],
+          "accessibility": {
+            "accessibilityData": {
+              "label": "MÉXICO X INGLATERRA JOGO AO VIVO | COPA DO MUNDO AO VIVO | MÉXICO AO VIVO | MÉXICO VS ENGLAND LIVE"
+            }
+          }
+        },
+        "ownerText": {
+          "runs": [
+            {
+              "text": "BFE | BATE FUNDO ESPORTIVO",
+              "navigationEndpoint": {
+                "clickTrackingParams": "CL4BENwwGAEiEwiZqfnBkbyVAxX4UrgEHdxZIBPKAQQLKpSx",
+                "commandMetadata": {
+                  "webCommandMetadata": {
+                    "url": "/@bfebatefundoesportivo",
+                    "webPageType": "WEB_PAGE_TYPE_CHANNEL",
+                    "rootVe": 3611,
+                    "apiUrl": "/youtubei/v1/browse"
+                  }
+                },
+                "browseEndpoint": {
+                  "browseId": "UCTdfZptF1bUzLd0IdjJ0N5Q",
+                  "canonicalBaseUrl": "/@bfebatefundoesportivo"
+                }
+              }
+            }
+          ]
+        },
+        "badges": [
+          {
+            "metadataBadgeRenderer": {
+              "icon": {
+                "iconType": "LIVE"
+              },
+              "style": "BADGE_STYLE_TYPE_LIVE_NOW",
+              "label": "AO VIVO",
+              "trackingParams": "CL4BENwwGAEiEwiZqfnBkbyVAxX4UrgEHdxZIBM="
+            }
+          },
+          {
+            "metadataBadgeRenderer": {
+              "style": "BADGE_STYLE_TYPE_SIMPLE",
+              "label": "Novo",
+              "trackingParams": "CL4BENwwGAEiEwiZqfnBkbyVAxX4UrgEHdxZIBM="
+            }
+          }
+        ],
+        "thumbnailOverlays": [
+          {
+            "thumbnailOverlayToggleButtonRenderer": {
+              "isToggled": false,
+              "untoggledIcon": {
+                "iconType": "WATCH_LATER"
+              },
+              "toggledIcon": {
+                "iconType": "CHECK"
+              },
+              "untoggledTooltip": "Assistir mais tarde",
+              "toggledTooltip": "Adicionado",
+              "untoggledServiceEndpoint": {
+                "clickTrackingParams": "CMABEPnnAxgDIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                "commandMetadata": {
+                  "webCommandMetadata": {
+                    "sendPost": true,
+                    "apiUrl": "/youtubei/v1/browse/edit_playlist"
+                  }
+                },
+                "playlistEditEndpoint": {
+                  "playlistId": "WL",
+                  "actions": [
+                    {
+                      "addedVideoId": "VoOng-r5xG8",
+                      "action": "ACTION_ADD_VIDEO"
+                    }
+                  ]
+                }
+              },
+              "toggledServiceEndpoint": {
+                "clickTrackingParams": "CMABEPnnAxgDIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                "commandMetadata": {
+                  "webCommandMetadata": {
+                    "sendPost": true,
+                    "apiUrl": "/youtubei/v1/browse/edit_playlist"
+                  }
+                },
+                "playlistEditEndpoint": {
+                  "playlistId": "WL",
+                  "actions": [
+                    {
+                      "action": "ACTION_REMOVE_VIDEO_BY_VIDEO_ID",
+                      "removedVideoId": "VoOng-r5xG8"
+                    }
+                  ]
+                }
+              },
+              "untoggledAccessibility": {
+                "accessibilityData": {
+                  "label": "Assistir mais tarde"
+                }
+              },
+              "toggledAccessibility": {
+                "accessibilityData": {
+                  "label": "Adicionado"
+                }
+              },
+              "trackingParams": "CMABEPnnAxgDIhMIman5wZG8lQMV-FK4BB3cWSAT"
+            }
+          },
+          {
+            "thumbnailOverlayToggleButtonRenderer": {
+              "untoggledIcon": {
+                "iconType": "ADD_TO_QUEUE_TAIL"
+              },
+              "toggledIcon": {
+                "iconType": "PLAYLIST_ADD_CHECK"
+              },
+              "untoggledTooltip": "Adicionar à fila",
+              "toggledTooltip": "Adicionado",
+              "untoggledServiceEndpoint": {
+                "clickTrackingParams": "CL8BEMfsBBgEIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                "commandMetadata": {
+                  "webCommandMetadata": {
+                    "sendPost": true
+                  }
+                },
+                "signalServiceEndpoint": {
+                  "signal": "CLIENT_SIGNAL",
+                  "actions": [
+                    {
+                      "clickTrackingParams": "CL8BEMfsBBgEIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                      "addToPlaylistCommand": {
+                        "openMiniplayer": true,
+                        "videoId": "VoOng-r5xG8",
+                        "listType": "PLAYLIST_EDIT_LIST_TYPE_QUEUE",
+                        "onCreateListCommand": {
+                          "clickTrackingParams": "CL8BEMfsBBgEIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                          "commandMetadata": {
+                            "webCommandMetadata": {
+                              "sendPost": true,
+                              "apiUrl": "/youtubei/v1/playlist/create"
+                            }
+                          },
+                          "createPlaylistServiceEndpoint": {
+                            "videoIds": [
+                              "VoOng-r5xG8"
+                            ],
+                            "params": "CAQ%3D"
+                          }
+                        },
+                        "videoIds": [
+                          "VoOng-r5xG8"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "untoggledAccessibility": {
+                "accessibilityData": {
+                  "label": "Adicionar à fila"
+                }
+              },
+              "toggledAccessibility": {
+                "accessibilityData": {
+                  "label": "Adicionado"
+                }
+              },
+              "trackingParams": "CL8BEMfsBBgEIhMIman5wZG8lQMV-FK4BB3cWSAT"
+            }
+          },
+          {
+            "thumbnailOverlayNowPlayingRenderer": {
+              "text": {
+                "runs": [
+                  {
+                    "text": "Tocando agora"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "thumbnailOverlayLoadingPreviewRenderer": {
+              "text": {
+                "runs": [
+                  {
+                    "text": "Mantenha o cursor em cima do vídeo para ver uma prévia"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "viewCountText": {
+          "runs": [
+            {
+              "text": "117"
+            },
+            {
+              "text": " assistindo"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "videoRenderer": {
+        "videoId": "0NpP7aheyek",
+        "title": {
+          "runs": [
+            {
+              "text": "BRASIL X NORUEGA AO VIVO | JOGO DA COPA AO VIVO | JOGO DA SELEÇÃO AO VIVO | CAZE TV AO VIVO"
+            }
+          ],
+          "accessibility": {
+            "accessibilityData": {
+              "label": "BRASIL X NORUEGA AO VIVO | JOGO DA COPA AO VIVO | JOGO DA SELEÇÃO AO VIVO | CAZE TV AO VIVO"
+            }
+          }
+        },
+        "ownerText": {
+          "runs": [
+            {
+              "text": "Litoral News",
+              "navigationEndpoint": {
+                "clickTrackingParams": "CLcBENwwGAIiEwiZqfnBkbyVAxX4UrgEHdxZIBPKAQQLKpSx",
+                "commandMetadata": {
+                  "webCommandMetadata": {
+                    "url": "/@LitoralNews",
+                    "webPageType": "WEB_PAGE_TYPE_CHANNEL",
+                    "rootVe": 3611,
+                    "apiUrl": "/youtubei/v1/browse"
+                  }
+                },
+                "browseEndpoint": {
+                  "browseId": "UCyvgW7qUI4RicX9KbMCabPQ",
+                  "canonicalBaseUrl": "/@LitoralNews"
+                }
+              }
+            }
+          ]
+        },
+        "badges": [
+          {
+            "metadataBadgeRenderer": {
+              "icon": {
+                "iconType": "LIVE"
+              },
+              "style": "BADGE_STYLE_TYPE_LIVE_NOW",
+              "label": "AO VIVO",
+              "trackingParams": "CLcBENwwGAIiEwiZqfnBkbyVAxX4UrgEHdxZIBM="
+            }
+          },
+          {
+            "metadataBadgeRenderer": {
+              "style": "BADGE_STYLE_TYPE_SIMPLE",
+              "label": "Novo",
+              "trackingParams": "CLcBENwwGAIiEwiZqfnBkbyVAxX4UrgEHdxZIBM="
+            }
+          }
+        ],
+        "thumbnailOverlays": [
+          {
+            "thumbnailOverlayToggleButtonRenderer": {
+              "isToggled": false,
+              "untoggledIcon": {
+                "iconType": "WATCH_LATER"
+              },
+              "toggledIcon": {
+                "iconType": "CHECK"
+              },
+              "untoggledTooltip": "Assistir mais tarde",
+              "toggledTooltip": "Adicionado",
+              "untoggledServiceEndpoint": {
+                "clickTrackingParams": "CLkBEPnnAxgCIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                "commandMetadata": {
+                  "webCommandMetadata": {
+                    "sendPost": true,
+                    "apiUrl": "/youtubei/v1/browse/edit_playlist"
+                  }
+                },
+                "playlistEditEndpoint": {
+                  "playlistId": "WL",
+                  "actions": [
+                    {
+                      "addedVideoId": "0NpP7aheyek",
+                      "action": "ACTION_ADD_VIDEO"
+                    }
+                  ]
+                }
+              },
+              "toggledServiceEndpoint": {
+                "clickTrackingParams": "CLkBEPnnAxgCIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                "commandMetadata": {
+                  "webCommandMetadata": {
+                    "sendPost": true,
+                    "apiUrl": "/youtubei/v1/browse/edit_playlist"
+                  }
+                },
+                "playlistEditEndpoint": {
+                  "playlistId": "WL",
+                  "actions": [
+                    {
+                      "action": "ACTION_REMOVE_VIDEO_BY_VIDEO_ID",
+                      "removedVideoId": "0NpP7aheyek"
+                    }
+                  ]
+                }
+              },
+              "untoggledAccessibility": {
+                "accessibilityData": {
+                  "label": "Assistir mais tarde"
+                }
+              },
+              "toggledAccessibility": {
+                "accessibilityData": {
+                  "label": "Adicionado"
+                }
+              },
+              "trackingParams": "CLkBEPnnAxgCIhMIman5wZG8lQMV-FK4BB3cWSAT"
+            }
+          },
+          {
+            "thumbnailOverlayToggleButtonRenderer": {
+              "untoggledIcon": {
+                "iconType": "ADD_TO_QUEUE_TAIL"
+              },
+              "toggledIcon": {
+                "iconType": "PLAYLIST_ADD_CHECK"
+              },
+              "untoggledTooltip": "Adicionar à fila",
+              "toggledTooltip": "Adicionado",
+              "untoggledServiceEndpoint": {
+                "clickTrackingParams": "CLgBEMfsBBgDIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                "commandMetadata": {
+                  "webCommandMetadata": {
+                    "sendPost": true
+                  }
+                },
+                "signalServiceEndpoint": {
+                  "signal": "CLIENT_SIGNAL",
+                  "actions": [
+                    {
+                      "clickTrackingParams": "CLgBEMfsBBgDIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                      "addToPlaylistCommand": {
+                        "openMiniplayer": true,
+                        "videoId": "0NpP7aheyek",
+                        "listType": "PLAYLIST_EDIT_LIST_TYPE_QUEUE",
+                        "onCreateListCommand": {
+                          "clickTrackingParams": "CLgBEMfsBBgDIhMIman5wZG8lQMV-FK4BB3cWSATygEECyqUsQ==",
+                          "commandMetadata": {
+                            "webCommandMetadata": {
+                              "sendPost": true,
+                              "apiUrl": "/youtubei/v1/playlist/create"
+                            }
+                          },
+                          "createPlaylistServiceEndpoint": {
+                            "videoIds": [
+                              "0NpP7aheyek"
+                            ],
+                            "params": "CAQ%3D"
+                          }
+                        },
+                        "videoIds": [
+                          "0NpP7aheyek"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "untoggledAccessibility": {
+                "accessibilityData": {
+                  "label": "Adicionar à fila"
+                }
+              },
+              "toggledAccessibility": {
+                "accessibilityData": {
+                  "label": "Adicionado"
+                }
+              },
+              "trackingParams": "CLgBEMfsBBgDIhMIman5wZG8lQMV-FK4BB3cWSAT"
+            }
+          },
+          {
+            "thumbnailOverlayNowPlayingRenderer": {
+              "text": {
+                "runs": [
+                  {
+                    "text": "Tocando agora"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "thumbnailOverlayLoadingPreviewRenderer": {
+              "text": {
+                "runs": [
+                  {
+                    "text": "Mantenha o cursor em cima do vídeo para ver uma prévia"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "viewCountText": {
+          "runs": [
+            {
+              "text": "4.794"
+            },
+            {
+              "text": " assistindo"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

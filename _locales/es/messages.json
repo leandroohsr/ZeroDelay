@@ -271,5 +271,29 @@
    },
    "reportIssue": {
       "message": "Reportar un problema"
+   },
+   "matchesTitle": {
+      "message": "Partidos en vivo"
+   },
+   "liveGamesWord": {
+      "message": "en vivo ahora"
+   },
+   "matchesUpcomingGroup": {
+      "message": "Próximos"
+   },
+   "matchesLiveTag": {
+      "message": "EN VIVO"
+   },
+   "matchesWatching": {
+      "message": "viendo"
+   },
+   "matchesWatchAria": {
+      "message": "Ver en YouTube"
+   },
+   "matchesEmpty": {
+      "message": "No hay partidos en vivo ahora."
+   },
+   "matchesLoading": {
+      "message": "Buscando partidos en vivo…"
    }
 }

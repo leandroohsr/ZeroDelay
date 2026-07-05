@@ -271,5 +271,29 @@
    },
    "reportIssue": {
       "message": "Relatar um problema"
+   },
+   "matchesTitle": {
+      "message": "Jogos ao vivo"
+   },
+   "liveGamesWord": {
+      "message": "ao vivo agora"
+   },
+   "matchesUpcomingGroup": {
+      "message": "Em breve"
+   },
+   "matchesLiveTag": {
+      "message": "AO VIVO"
+   },
+   "matchesWatching": {
+      "message": "assistindo"
+   },
+   "matchesWatchAria": {
+      "message": "Assistir no YouTube"
+   },
+   "matchesEmpty": {
+      "message": "Nenhum jogo ao vivo agora."
+   },
+   "matchesLoading": {
+      "message": "Buscando jogos ao vivo…"
    }
 }

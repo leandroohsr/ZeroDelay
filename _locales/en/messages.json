@@ -271,5 +271,29 @@
    },
    "reportIssue": {
       "message": "Report an issue"
+   },
+   "matchesTitle": {
+      "message": "Live games"
+   },
+   "liveGamesWord": {
+      "message": "live now"
+   },
+   "matchesUpcomingGroup": {
+      "message": "Upcoming"
+   },
+   "matchesLiveTag": {
+      "message": "LIVE"
+   },
+   "matchesWatching": {
+      "message": "watching"
+   },
+   "matchesWatchAria": {
+      "message": "Watch on YouTube"
+   },
+   "matchesEmpty": {
+      "message": "No live matches right now."
+   },
+   "matchesLoading": {
+      "message": "Finding live games…"
    }
 }
