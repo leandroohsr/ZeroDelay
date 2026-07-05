@@ -401,7 +401,23 @@ export const SCHEDULE_CHANNELS = {
     IN: ['IndianSuperLeague'],
 };
 
-/** Fetch the region's schedule channels' /streams and collect their upcoming matches. */
+/** The exact UTC start (ms) of a scheduled video, from its watch page — or null. */
+export async function fetchScheduledStartTime(videoId, fetchImpl, signal) {
+    try {
+        const r = await fetchImpl(`https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&hl=en`, { credentials: 'omit', signal });
+        if (!r.ok) return null;
+        const m = /"scheduledStartTime":"(\d+)"/.exec(await r.text());
+        return m ? Number(m[1]) * 1000 : null;
+    } catch { return null; }
+}
+
+/**
+ * Fetch the region's schedule channels' /streams and collect their upcoming
+ * matches. The /streams tab only carries a localized DISPLAY time (in YouTube's
+ * render timezone, not the viewer's) — so the parsed clock is off by a constant
+ * offset. We fix it once: read one video's exact UTC start from its watch page,
+ * derive that offset, and shift every item by it (all rendered in the same zone).
+ */
 export async function fetchChannelUpcoming(o = {}) {
     const { region = '', fetchImpl, signal } = o;
     const handles = SCHEDULE_CHANNELS[(region || '').toUpperCase()] || [];
@@ -412,7 +428,17 @@ export async function fetchChannelUpcoming(o = {}) {
             .then(r => (r.ok ? r.text() : ''))
             .then(html => parseChannelStreams(html, { channel: h, handle: h.toLowerCase() }).upcoming)
             .catch(() => [])));
-    return lists.flat();
+    const items = lists.flat().sort((a, b) => (a.scheduledStart || Infinity) - (b.scheduledStart || Infinity));
+
+    // Calibrate the display-time → UTC offset from the first item that resolves.
+    let offset = null;
+    for (const m of items.slice(0, 3)) {
+        if (m.scheduledStart == null) continue;
+        const exact = await fetchScheduledStartTime(m.videoId, fetchImpl, signal);
+        if (exact != null) { offset = exact - m.scheduledStart; break; }
+    }
+    return offset == null ? items
+        : items.map(m => (m.scheduledStart != null ? { ...m, scheduledStart: m.scheduledStart + offset } : m));
 }
 
 /**

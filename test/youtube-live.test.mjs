@@ -10,7 +10,7 @@ import {
     extractYtInitialData, parseVideoRenderer, parseYtInitialData, parseLiveSearchHtml,
     buildSearchUrl, queryForLang, thumbUrl, watchUrl, fetchLiveMatches,
     regionFromLang, trustedSet, isTrusted,
-    isMatchBroadcast, parseScheduledText, parseChannelStreams,
+    isMatchBroadcast, parseScheduledText, parseChannelStreams, fetchChannelUpcoming,
 } from '../youtube-live.js';
 
 const fixture = JSON.parse(readFileSync(
@@ -165,6 +165,31 @@ test('parseChannelStreams — lockupViewModel: upcoming match kept, commentary d
     assert.equal(live.length, 1);
     assert.equal(live[0].id, 'ccccccccccc');
     assert.equal(live[0].status, 'live');
+});
+
+test('fetchChannelUpcoming — calibrates /streams display time to real UTC (tz fix)', async () => {
+    const lock = (id, title, sched) => ({ lockupViewModel: {
+        contentId: id,
+        metadata: { lockupMetadataViewModel: { title: { content: title }, metadata: { m: { text: { content: sched } } } } },
+        contentImage: { thumbnailViewModel: { overlays: [{ thumbnailBottomOverlayViewModel: { badges: [{ thumbnailBadgeViewModel: { text: 'Upcoming' } }] } }] } },
+    } });
+    const streamsHtml = asHtml({ contents: [
+        lock('mexeng0000a', 'AO VIVO: MÉXICO X INGLATERRA | COPA', 'Scheduled for 7/5/26, 3:30 PM'),
+        lock('portesp000b', 'AO VIVO: PORTUGAL X ESPANHA | COPA', 'Scheduled for 7/5/26, 5:30 PM'),
+    ] });
+    let watchCalls = 0;
+    const fetchImpl = async url => {
+        if (url.includes('/watch')) { watchCalls++; return { ok: true, text: async () => '..."scheduledStartTime":"1783290600"...' }; } // 2026-07-05T22:30:00Z
+        return { ok: true, text: async () => streamsHtml };
+    };
+    const up = await fetchChannelUpcoming({ region: 'BR', fetchImpl });
+    assert.equal(up.length, 2);
+    assert.equal(watchCalls, 1, 'ONE watch fetch calibrates the whole list');
+    const by = Object.fromEntries(up.map(m => [m.id, m.scheduledStart]));
+    // The "3:30 PM" display text is really 22:30 UTC (the tz bug); calibration fixes it,
+    // and the +2h gap to the next match is preserved.
+    assert.equal(new Date(by.mexeng0000a).toISOString(), '2026-07-05T22:30:00.000Z');
+    assert.equal(by.portesp000b - by.mexeng0000a, 2 * 3600000);
 });
 
 test('buildSearchUrl / queryForLang — localized query + live filter', () => {
