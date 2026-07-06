@@ -355,7 +355,7 @@ function renderLiveGames() {
     };
 
     const card = m => el('button', {
-        class: 'lg-card', type: 'button', 'aria-label': `${L.matchesWatchAria}: ${m.title}`,
+        class: 'lg-card', type: 'button', 'data-title': m.title, 'aria-label': `${L.matchesWatchAria}: ${m.title}`,
         onclick: () => { try { chrome.tabs.create({ url: m.watchUrl }); } catch { /* best-effort */ } },
     },
         el('span', { class: 'lg-thumb' },
@@ -366,6 +366,8 @@ function renderLiveGames() {
                 : el('span', { class: 'lg-badge lg-badge--soon', text: L.matchesUpcomingGroup }),
         ),
         el('span', { class: 'lg-info' },
+            // Visible title is clamped to 2 lines; the styled balloon (.lg-card::after,
+            // fed by data-title) shows the full title on hover — see popup.css.
             el('span', { class: 'lg-title', text: m.title }),
             el('span', { class: 'lg-meta', text: metaText(m) }),
         ),

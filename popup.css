@@ -1620,7 +1620,9 @@ body.hexa [data-signal="synced"] .brand-o::after {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--surface);
-    overflow: hidden;
+    /* visible (not hidden) so the title balloon can escape the section on hover;
+     * the banner rounds its own corners below, which is what overflow:hidden did. */
+    overflow: visible;
 }
 
 .lg-banner {
@@ -1638,7 +1640,14 @@ body.hexa [data-signal="synced"] .brand-o::after {
     letter-spacing: 0.04em;
     text-transform: uppercase;
     cursor: pointer;
+    /* Round the top corners itself (the section no longer clips). Collapsed, the
+     * banner is the whole card, so it rounds all four (rule below). */
+    border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
     transition: background 160ms var(--ease), color 160ms var(--ease);
+}
+
+.lg-banner[aria-expanded="false"] {
+    border-radius: calc(var(--radius) - 1px);
 }
 
 .lg-banner:hover:not(:disabled) {
@@ -1711,6 +1720,7 @@ body.hexa [data-signal="synced"] .brand-o::after {
 }
 
 .lg-card {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1734,6 +1744,74 @@ body.hexa [data-signal="synced"] .brand-o::after {
 
 .lg-card:active {
     transform: translateY(0);
+}
+
+/* Full-title balloon on hover/focus — the visible .lg-title is clamped to 2 lines.
+ * Fed by the card's data-title, themed with the ZeroDelay tokens, and instant (no
+ * native-tooltip delay). Floats above the card; the section is overflow:visible. */
+.lg-card::after {
+    content: attr(data-title);
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: calc(100% + 6px);
+    z-index: 20;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-3);
+    color: var(--text);
+    box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.55);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: left;
+    white-space: normal;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 90ms var(--ease), transform 90ms var(--ease);
+}
+
+/* Little downward tail so it reads as a speech balloon. */
+.lg-card::before {
+    content: "";
+    position: absolute;
+    left: 24px;
+    bottom: calc(100% + 1px);
+    z-index: 21;
+    width: 10px;
+    height: 10px;
+    background: var(--surface-3);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    transform: rotate(45deg);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 90ms var(--ease);
+}
+
+.lg-card:hover::after,
+.lg-card:focus-visible::after {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lg-card:hover::before,
+.lg-card:focus-visible::before {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .lg-card::after,
+    .lg-card::before {
+        transition: none;
+    }
+
+    .lg-card::after {
+        transform: none;
+    }
 }
 
 .lg-thumb {
